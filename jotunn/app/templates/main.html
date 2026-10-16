@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Jötunn Catalyst</title>
+
+    <meta charset="UTF-8" />
+    <meta name="description" content="A Destiny 2 player comparison project" />
+    <meta
+      name="keywords"
+      content="Jötunn, Catalyst, Jotunn, Destiny, Destiny 2"
+    />
+    <meta name="author" content="Thomas McGinley" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../static/reset.css" rel="stylesheet" />
+    <link href="../static/shared.css" rel="stylesheet" />
+    <link rel="icon" href="../static/jotunn.jpg" />
+  </head>
+  {% include "./diffraction.html" %}
+  <body>
+    <nav class="nav">
+      <a class="nav__link" href="/">Home</a> &nbsp; | &nbsp;
+      <a class="nav__link nav__link--active" href="/main">Search</a>&nbsp; |
+      &nbsp; <a class="nav__link" href="/contact">JÖTN Clan Stats</a>&nbsp; |
+      &nbsp; <a class="nav__link" href="/about">About Us</a>
+    </nav>
+    <hr />
+    <div class="main">
+      <div class="main__contentbox">
+        <div class="main__container">
+          <div class="main__head">
+            <h1 class="main__texthead">Player Lookup</h1>
+          </div>
+          <form class="search__container" action="{{ url_for('main.load') }}">
+            <input
+              class="search__input"
+              type="text"
+              name="q"
+              pattern="{{ '^[A-Za-z0-9 ]+[#]\d{4}$' }}"
+              placeholder="guardian#0000"
+              value="{{ request.args.get('q','') }}"
+              required
+            />
+            <button class="search__button" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="main__container">
+          <div class="main__head">
+            <h1 class="main__texthead">Player Comparison</h1>
+          </div>
+          <form class="search__container" action="{{ url_for('main.load') }}">
+            <input
+              class="search__input"
+              type="text"
+              name="p1"
+              pattern="{{ '^[A-Za-z0-9 ]+[#]\d{4}$' }}"
+              placeholder="guardian#0000"
+              value="{{ request.args.get('p1','') }}"
+              required
+            />
+            <input
+              class="search__input"
+              type="text"
+              name="p2"
+              pattern="{{ '^[A-Za-z0-9 ]+[#]\d{4}$' }}"
+              placeholder="guardian#0000"
+              value="{{ request.args.get('p2','') }}"
+              required
+            />
+            <button class="search__button" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="main__container">
+          <div class="main__head">
+            <h1 class="main__texthead">JÖTN Quick Links</h1>
+          </div>
+          <p class="main__text">
+            <a href="/loading?q=SlayWarsV%237547" class="main__link"
+              >SlayWarsV#7547</a
+            >
+          </p>
+          <p class="main__text">
+            <a href="/loading?q=Man+in+the+Moon%234234" class="main__link"
+              >Man in the Moon#4234</a
+            >
+          </p>
+          <p class="main__text">
+            <a href="/loading?q=Piepuns%232163" class="main__link"
+              >Piepuns#2163</a
+            >
+          </p>
+          <p class="main__text">
+            <a href="/loading?q=Lachlan%238810" class="main__link"
+              >Lachlan#8810</a
+            >
+          </p>
+          <p class="main__text">
+            <a href="/loading?q=HeavyChevy%236575" class="main__link"
+              >HeavyChevy#6575</a
+            >
+          </p>
+          <p class="main__text">
+            <a href="/loading?q=Gargoyle+Goose%230957" class="main__link"
+              >Gargoyle Goose#0957</a
+            >
+          </p>
+          <p class="main__text">
+            <a href="/loading?q=TheZefraOracle%234521" class="main__link"
+              >TheZefraOracle#4521</a
+            >
+          </p>
+          <p class="main__text">
+            <a href="/loading?q=The+Chrome+Leaf%230952" class="main__link"
+              >The Chrome Leaf#0952</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </body>
+  <footer>
+    OCTOBER 2026 &nbsp; | &nbsp;
+    <a class="nav__link" href="/privacy">PRIVACY POLICY</a>
+  </footer>
+</html>

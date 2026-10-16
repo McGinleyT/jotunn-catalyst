@@ -1,0 +1,21 @@
+services:
+  jotunncatalyst:
+    build: ./jotunn
+    expose:
+      - 5050
+    container_name: jotunncatalyst
+    restart: unless-stopped
+    env_file:
+      - .env
+    labels:
+      - "traefik.enable=true"
+      # Main domain
+      - "traefik.http.routers.jotunncatalyst.rule=Host(`jotunncatalyst.com`) || Host(`www.jotunncatalyst.com`)"
+      - "traefik.http.routers.jotunncatalyst.entrypoints=web"
+      # Internal service port
+      - "traefik.http.services.jotunncatalyst.loadbalancer.server.port=5050"
+    networks:
+      - proxy
+networks:
+  proxy:
+    external: true

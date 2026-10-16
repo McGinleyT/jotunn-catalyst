@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Jötunn Catalyst</title>
+
+    <meta charset="UTF-8" />
+    <meta name="description" content="A Destiny 2 player comparison project" />
+    <meta
+      name="keywords"
+      content="Jötunn, Catalyst, Jotunn, Destiny, Destiny 2"
+    />
+    <meta name="author" content="Thomas McGinley" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../static/reset.css" rel="stylesheet" />
+    <link href="../static/shared.css" rel="stylesheet" />
+    <link rel="icon" href="../static/jotunn.jpg" />
+  </head>
+  {% include "./diffraction.html" %}
+  <body>
+    <img class="logo__image diffracted" src="../static/blackarmory.svg" />
+    <hr />
+    <div class="main">
+      <div class="main__contentbox">
+        <div class="main__container">
+          <div class="main__head">
+            <h1 class="main__texthead">Loading your content...</h1>
+          </div>
+          <p class="main__text">This may take a minute or two.</p>
+          <script>
+            setTimeout(() => {
+              const queryString = window.location.search;
+              const urlParams = new URLSearchParams(queryString);
+
+              const singlePlayer = urlParams.get("q");
+              const comparePlayerOne = urlParams.get("p1");
+              const comparePlayerTwo = urlParams.get("p2");
+
+              if (singlePlayer != null) {
+                window.location.href = `/player` + window.location.search;
+                window.history.replaceState({}, "", "/main");
+              } else if (comparePlayerOne != null && comparePlayerTwo != null) {
+                window.location.href = `/compare` + window.location.search;
+                window.history.replaceState({}, "", "/main");
+              }
+            }, 120);
+          </script>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </body>
+</html>

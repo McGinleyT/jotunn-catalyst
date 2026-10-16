@@ -1,0 +1,460 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'DestinySymbols';
+    src: url('./destiny_symbols_common.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --void: #B283CC;
+    --solar: #F16F27;
+    --arc: #7AECF3;
+    --stasis: #4D87FF;
+    --strand: #35E366;
+
+    --text-white: #fafaf0;
+    --text-select: rgb(150, 150, 150);
+    --text-dark: #141414;
+    --glass: rgba(60, 60, 60, 0.3);
+    --filterblur: .35px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--text-dark);
+    background-image: url(./stars.svg);
+    background-size: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    height: 100dvh;
+    color: var(--text-white);
+}
+
+body {
+    font-size: 100%;
+    font-weight: inherit;
+    margin: 0px;
+    padding: 0px;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+hr {
+    display: block;
+    width: 50vw;
+    height: 1px;
+    min-height: 1px;
+    background-color: var(--text-white);
+    filter: url(#rgb-diffract);
+    margin: 20px 0;
+}
+
+/*NAV (VERSION 3)--------------------------------*/
+
+
+.nav {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    backdrop-filter: url(#rgb-diffract) blur(var(--filterblur));
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    height: 20px;
+    background-color: rgb(20 20 20 / .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.nav__link {
+    color: var(--text-white);
+    text-decoration: none;
+}
+
+.nav__link--active {
+    text-decoration: underline;
+}
+
+.nav__link:hover {
+    text-decoration: underline;
+}
+
+.nav__logoimage:hover {
+    filter: url(#rgb-diffract);
+}
+
+.outlink {
+    color: #0000ff;
+}
+
+.player__title {
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50vw;
+}
+
+.logo__image {
+    height: 15vh;
+    margin: 0 auto;
+}
+
+/*MAIN BODY BOX--------------------------------------*/
+.main {
+    height: calc-size(auto, size + 10px);
+    max-height: 70vh;
+    min-height: 0;
+    width: 50vw;
+    padding: 20px;
+    backdrop-filter: url(#rgb-diffract) blur(var(--filterblur));
+    background-color: rgb(20 20 20 / .5);
+}
+
+.main__contentbox {
+    height: 100%;
+    --cols: 6;
+    overflow-y: auto;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.main__container--split {
+    display: grid;
+    grid-template-columns: 50fr 50fr;
+}
+
+.main__container {
+    display: block;
+    /* height: calc(var(--size) - 20px); */
+    position: relative;
+}
+
+.main__container--right {
+    text-align: right;
+}
+
+.main__subcontainer {
+    display: grid;
+    grid-template-columns: 50fr 50fr;
+}
+
+.main__stack {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main__head {
+    display: flex;
+    justify-content: space-between;
+    /* padding-right: 20px; */
+}
+
+.main__head--right {
+    padding-right: 0;
+    /* padding-left: 20px; */
+    flex-direction: row-reverse;
+    text-align: end;
+}
+
+
+
+.main__texthead {
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 20px;
+    align-self: center;
+    background-color: var(--text-white);
+    color: rgb(20, 20, 20);
+    margin: 5px 5px 0;
+    min-width: 8rem;
+    max-width: 90%;
+}
+
+.main__texthead--description {
+    align-self: center;
+    font-size: 16px;
+}
+
+.main__text {
+    margin: 5px 5px 0;
+}
+
+.main__imagebox {
+    height: 25px;
+}
+
+.main__image {
+    height: 100%;
+    object-fit: contain;
+    /* filter: grayscale(1); */
+}
+
+.main__image--profile {
+    height: 8rem;
+    width: 8rem;
+    object-fit: contain;
+    overflow: hidden;
+    margin: 5px 10px 0 5px;
+    float: left;
+}
+
+.main__image--profile--right {
+    margin: 5px 5px 0 10px;
+    float: right;
+}
+
+.main__image--heatmap {
+    height: 8rem;
+    width: 100%;
+    object-fit: contain;
+    overflow: hidden;
+    margin: 5px 5px 0 0;
+    float: inline-end;
+    /* border: 1px solid var(--text-white); */
+}
+
+.classbar--container {
+    width: 100%;
+    margin: 5px;
+}
+
+.classbar {
+    display: grid;
+    font-size: 16px;
+    height: 1.25rem;
+    width: 100%;
+    margin: 3px 0;
+    overflow: hidden;
+}
+
+.classbar--label {
+    font-family: "DestinySymbols"
+}
+
+.classbar__segment {
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main__table {
+    width: 90%;
+    margin: 0 0 0 5px;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+.main__table--right {
+    margin: 0 5px 0 0;
+    float: right;
+}
+
+.main__table__row:nth-child(odd) {
+    background-color: var(--glass);
+}
+
+.data--key {
+    text-align: start;
+}
+
+.data--value {
+    text-align: end;
+}
+
+.main__link {
+    color: var(--text-white);
+    text-decoration: none;
+}
+
+.main__link:hover {
+    text-decoration: underline;
+}
+
+.diffracted {
+    filter: grayscale(1) url(#rgb-diffract);
+}
+
+.diffracted--hover:hover {
+    filter: url(#rgb-diffract);
+}
+
+.covered {
+    object-fit: cover;
+}
+
+/*SEARCH BOX----------------------------------------*/
+.search__container {
+    display: flex;
+    /* justify-content: space-between; */
+    margin: 5px;
+}
+
+.search__input {
+    background-color: rgba(60, 60, 60, 0.3);
+    font-family: 'Courier New', Courier, monospace;
+    color: var(--text-white);
+    height: 2em;
+    width: 50%;
+    margin-right: 5px;
+    padding: 5px;
+}
+
+.search__button {
+    font-family: 'Courier New', Courier, monospace;
+    height: 2em;
+    padding: 5px;
+    background-color: var(--text-white);
+    color: var(--text-dark);
+}
+
+.search__button:hover {
+    /* background-color: var(--text-select); */
+    /* filter: url(#rgb-diffract); */
+    text-decoration: underline;
+}
+
+/*FOOTER--------------------------------------------*/
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    backdrop-filter: url(#rgb-diffract) blur(var(--filterblur));
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    text-decoration: none;
+    height: 20px;
+    background-color: rgb(20 20 20 / .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg--strand {
+    background-color: var(--strand);
+}
+
+.bg--stasis {
+    background-color: var(--stasis);
+}
+
+.bg--arc {
+    background-color: var(--arc);
+}
+
+.bg--solar {
+    background-color: var(--solar);
+}
+
+.bg--void {
+    background-color: var(--void);
+}
+
+.bg--exotic {
+    background-color: #daa520;
+}
+
+@supports (-webkit-backdrop-filter: blur(var(--filterblur))) {
+
+    .nav,
+    .main,
+    footer {
+        -webkit-backdrop-filter: blur(2px);
+        backdrop-filter: blur(2px);
+    }
+}
+
+/*MEDIA AND PRINT-------------------------------------------*/
+@media screen and (max-width: 1500px) {
+
+    .player__title,
+    .main,
+    hr {
+        width: 75vw;
+    }
+}
+
+@media screen and (max-width: 900px) {
+
+    html,
+    body {
+        height: 100dvh;
+    }
+
+    body {
+        align-items: none;
+        justify-content: none;
+    }
+
+    .nav {
+        position: relative;
+        font-size: 12px;
+        height: 3rem;
+    }
+
+    hr {
+        width: 90vw;
+        position: relative;
+    }
+
+    .main {
+        position: relative;
+        flex: 1;
+        max-height: 100vh;
+        width: 90vw;
+    }
+
+    .main__texthead {
+        width: min-content;
+    }
+
+    footer {
+        position: relative;
+        font-size: 10px;
+        height: 3rem;
+    }
+}
+
+
+
+@media print {
+
+    *,
+    #pageTitle,
+    nav>ul>li>a,
+    ol>li>a {
+        color: black;
+    }
+
+    @page {
+        size: landscape;
+    }
+}

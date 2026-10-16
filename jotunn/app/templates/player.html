@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Jötunn Catalyst</title>
+
+    <meta charset="UTF-8" />
+    <meta name="description" content="A Destiny 2 player comparison project" />
+    <meta
+      name="keywords"
+      content="Jötunn, Catalyst, Jotunn, Destiny, Destiny 2"
+    />
+    <meta name="author" content="Thomas McGinley" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../static/reset.css" rel="stylesheet" />
+    <link href="../static/shared.css" rel="stylesheet" />
+    <link rel="icon" href="../static/jotunn.jpg" />
+  </head>
+  {% include "./diffraction.html" %}
+  <body>
+    <nav class="nav">
+      <a class="nav__link" href="/">Home</a> &nbsp; | &nbsp;
+      <a class="nav__link" href="/main">Search</a>&nbsp; | &nbsp;
+      <a class="nav__link" href="/contact">JÖTN Clan Stats</a>&nbsp; | &nbsp;
+      <a class="nav__link" href="/about">About Us</a>
+    </nav>
+    {% if found %}
+    <h1 class="player__title">{{ data.name }}</h1>
+    {% endif %}
+    <hr />
+    <div class="main">
+      <div class="main__contentbox">
+        {% if found %} {% for ch_id,character in data.characters.items() %}
+        <div class="main__container">
+          <div class="main__head">
+            <h1 class="main__texthead">{{ character.class }}</h1>
+          </div>
+          <img
+            class="main__image--profile"
+            src="{{ 'https://www.bungie.net' ~ character.emblemPath }}"
+            draggable="false"
+            alt="Emblem"
+          />
+          <img
+            class="main__image--heatmap"
+            src="data:image/png;base64,{{ character.heatmapURL }}"
+            draggable="false"
+            alt="Heatmap"
+          />
+          <p class="main__text">Light: {{ character.lightLevel }}</p>
+          <p class="main__text">Playtime: {{ character.timePlayed }}</p>
+          <p class="main__text">Race: {{ character.race }}</p>
+        </div>
+        {% endfor %}
+        <div class="main__container">
+          <div class="main__head">
+            <h1 class="main__texthead">Kills by element this season</h1>
+          </div>
+          <div class="main__head">
+            <div class="classbar--container">
+              {% if data.account.finalBlows.total == 0 %}
+              <div
+                class="classbar"
+                style="grid-template-columns: 20fr 20fr 20fr 20fr 20fr"
+              >
+              {% else %}
+              <div
+                class="classbar"
+                style="grid-template-columns: {{ data.account.finalBlowsPcts.pctStrand }}fr {{ data.account.finalBlowsPcts.pctStasis }}fr {{ data.account.finalBlowsPcts.pctSolar }}fr {{ data.account.finalBlowsPcts.pctArc }}fr {{ data.account.finalBlowsPcts.pctVoid }}fr"
+              >
+              {% endif %}
+                <div
+                  class="classbar__segment classbar--label"
+                  style="color: var(--strand)"
+                >
+                  &#xEF0E;
+                </div>
+                <div
+                  class="classbar__segment classbar--label"
+                  style="color: var(--stasis)"
+                >
+                  &#xE139;
+                </div>
+                <div
+                  class="classbar__segment classbar--label"
+                  style="color: var(--solar)"
+                >
+                  &#xE140;
+                </div>
+                <div
+                  class="classbar__segment classbar--label"
+                  style="color: var(--arc)"
+                >
+                  &#xE143;
+                </div>
+                <div
+                  class="classbar__segment classbar--label"
+                  style="color: var(--void)"
+                >
+                  &#xE144;
+                </div>
+              </div>
+              {% if data.account.finalBlows.total == 0 %}
+              <div
+                class="classbar"
+                style="grid-template-columns: 20fr 20fr 20fr 20fr 20fr"
+              >
+              {% else %}
+              <div
+                class="classbar"
+                style="grid-template-columns: {{ data.account.finalBlowsPcts.pctStrand }}fr {{ data.account.finalBlowsPcts.pctStasis }}fr {{ data.account.finalBlowsPcts.pctSolar }}fr {{ data.account.finalBlowsPcts.pctArc }}fr {{ data.account.finalBlowsPcts.pctVoid }}fr"
+              >
+              {% endif %}
+                <div class="classbar__segment bg--strand">
+                  {{ data.account.finalBlows.strand | round(2) }}
+                </div>
+                <div class="classbar__segment bg--stasis">
+                  {{ data.account.finalBlows.stasis | round(2) }}
+                </div>
+                <div class="classbar__segment bg--solar">
+                  {{ data.account.finalBlows.solar | round(2) }}
+                </div>
+                <div class="classbar__segment bg--arc">
+                  {{ data.account.finalBlows.arc | round(2) }}
+                </div>
+                <div class="classbar__segment bg--void">
+                  {{ data.account.finalBlows.void | round(2) }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main__subcontainer">
+          <div class="main__stack">
+            <div class="main__container">
+              <div class="main__head">
+                <h1 class="main__texthead">Kills</h1>
+              </div>
+              <table class="main__table">
+                <tbody>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Total Kills</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.finalBlows.total }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">
+                      Standalone Kills
+                    </td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.kills }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Assists</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.assists }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Precision Kills</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.precisionKills }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="main__container">
+              <div class="main__head">
+                <h1 class="main__texthead">Deaths</h1>
+              </div>
+              <table class="main__table">
+                <tbody>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Deaths</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.deaths }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Suicides</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.suicides }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">
+                      Longest Single Life
+                    </td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.longestSingleLife }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="main__container">
+              <div class="main__head">
+                <h1 class="main__texthead">Combat</h1>
+              </div>
+              <table class="main__table">
+                <tbody>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">KD Ratio</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.killsDeathsRatio }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">KDA</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.killsDeathsAssists }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">
+                      PVP Combat Rating
+                    </td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.combatRating }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="main__container">
+            <div class="main__head">
+              <h1 class="main__texthead">Weapon archetype usage</h1>
+            </div>
+            <table class="main__table">
+              <tbody>
+                {% for weaponArch,kills in data.account.weapons.items() %}
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">{{ weaponArch }}</td>
+                  <td class="main__table__data data--value">{{ kills }}</td>
+                </tr>
+                {% endfor %}
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">&nbsp;</td>
+                  <td class="main__table__data data--value">&nbsp;</td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Relics</td>
+                  <td class="main__table__data data--value">
+                    {{ data.account.aggregates.relicKills }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Grenade</td>
+                  <td class="main__table__data data--value">
+                    {{ data.account.aggregates.grenadeKills }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Melee</td>
+                  <td class="main__table__data data--value">
+                    {{ data.account.aggregates.meleeKills }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Super</td>
+                  <td class="main__table__data data--value">
+                    {{ data.account.aggregates.superKills }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="main__stack">
+            <div class="main__container">
+              <div class="main__head">
+                <h1 class="main__texthead">Orbs of Light</h1>
+              </div>
+              <table class="main__table">
+                <tbody>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Created</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.orbsDropped }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Collected</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.orbsGathered }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="main__container">
+              <div class="main__head">
+                <h1 class="main__texthead">Activities</h1>
+              </div>
+              <table class="main__table">
+                <tbody>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">
+                      Activity Completions
+                    </td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.activitiesCleared }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Public Events</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.publicEventsCompleted }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="main__container">
+              <div class="main__head">
+                <h1 class="main__texthead">Silly Corner</h1>
+              </div>
+              <table class="main__table">
+                <tbody>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">
+                      Total Fish Caught
+                    </td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.extra.totalFish }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Heaviest Fish</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.extra.heaviestFish / 100 }} kg
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Archie Pets</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.extra.goodBoy }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Cookies Baked</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.extra.cookiesBaked }}
+                    </td>
+                  </tr>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Snowball Kills</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.extra.snowballDefeats }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="main__subcontainer">
+          <div class="main__container">
+            <div class="main__head">
+              <h1 class="main__texthead bg--exotic">Exotic kills</h1>
+            </div>
+            <table class="main__table">
+              <tbody>
+                {% for weapon,stats in data.exotics.items() %}
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">{{ weapon }}</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.kills }}
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="main__stack">
+          {% for raid,stats in data.raids.items() %}
+          <div class="main__container">
+            <div class="main__head">
+              <h1 class="main__texthead bg--void">{{ raid }}</h1>
+            </div>
+            <table class="main__table">
+              <tbody>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Clears</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.clears }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Kills</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.kills }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Deaths</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.deaths }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">K/D</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.ratio }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Fastest</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.fastest }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Time played</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.playtime }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            {% endfor %}
+          </div>
+          <div class="main__stack">
+          {% for dungeon,stats in data.dungeons.items() %}
+          <div class="main__container">
+            <div class="main__head">
+              <h1 class="main__texthead bg--stasis">{{ dungeon }}</h1>
+            </div>
+            <table class="main__table">
+              <tbody>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Clears</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.clears }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Kills</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.kills }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Deaths</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.deaths }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">K/D</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.ratio }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Fastest</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.fastest }}
+                  </td>
+                </tr>
+                <tr class="main__table__row">
+                  <td class="main__table__data data--key">Time played</td>
+                  <td class="main__table__data data--value">
+                    {{ stats.playtime }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            {% endfor %}
+        </div>
+        </div>
+        {% else %}
+        <div class="main__container">
+          <div class="main__head">
+            <h1 class="main__texthead">Player not found!</h1>
+          </div>
+          <p class="main__text">
+            The player you were looking for was not found. Please try a
+            different player name.
+          </p>
+          <a class="main__text outlink" href="/main">Return to player search</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <hr />
+  </body>
+  <footer>
+    OCTOBER 2026 &nbsp; | &nbsp;
+    <a class="nav__link" href="/privacy">PRIVACY POLICY</a>
+  </footer>
+</html>

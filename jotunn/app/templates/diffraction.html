@@ -1,0 +1,47 @@
+<svg
+  style="position: absolute; width: 0; height: 0; visibility: hidden"
+  aria-hidden="true"
+>
+  <filter id="rgb-diffract">
+    <feOffset
+      id="redshift"
+      in="SourceGraphic"
+      dx="-3"
+      dy="0"
+      result="layer-one"
+    />
+    <feComponentTransfer in="layer-one" result="red">
+      <feFuncR type="identity" />
+      <feFuncG type="discrete" tableValues="0" />
+      <feFuncB type="discrete" tableValues="0" />
+    </feComponentTransfer>
+
+    <feOffset
+      id="greenshift"
+      in="SourceGraphic"
+      dx="0"
+      dy="0"
+      result="layer-two"
+    />
+    <feComponentTransfer in="layer-two" result="green">
+      <feFuncR type="discrete" tableValues="0" />
+      <feFuncG type="identity" />
+      <feFuncB type="discrete" tableValues="0" />
+    </feComponentTransfer>
+
+    <feOffset
+      id="blueshift"
+      in="SourceGraphic"
+      dx="3"
+      dy="0"
+      result="layer-three"
+    />
+    <feComponentTransfer in="layer-three" result="blue">
+      <feFuncR type="discrete" tableValues="0" />
+      <feFuncG type="discrete" tableValues="0" />
+      <feFuncB type="identity" />
+    </feComponentTransfer>
+    <feBlend in="red" in2="green" mode="screen" result="blend1" />
+    <feBlend in="blend1" in2="blue" mode="screen" result="color-split" />
+  </filter>
+</svg>
