@@ -14,6 +14,16 @@ def main():
     return render_template("main.html")
 
 
+@main_bp.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@main_bp.route("/privacy")
+def privacy():
+    return render_template("privacy.html")
+
+
 @main_bp.route("/loading")
 def load():
     query = request.args.get("q", None)

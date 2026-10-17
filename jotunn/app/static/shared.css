@@ -66,6 +66,10 @@ hr {
     margin: 20px 0;
 }
 
+b {
+    font-weight: bold;
+}
+
 /*NAV (VERSION 3)--------------------------------*/
 
 
@@ -104,6 +108,7 @@ hr {
 }
 
 .outlink {
+    background-color: var(--text-white);
     color: #0000ff;
 }
 
@@ -114,7 +119,7 @@ hr {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 50vw;
+    width: 50%;
 }
 
 .logo__image {
@@ -366,10 +371,13 @@ footer {
 /*MEDIA AND PRINT-------------------------------------------*/
 @media screen and (max-width: 1500px) {
 
-    .player__title,
     .main,
     hr {
         width: 75vw;
+    }
+
+    .player__title {
+        width: 75%;
     }
 }
 
