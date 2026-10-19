@@ -23,9 +23,9 @@
       <a class="nav__link" href="/clan">JÖTN Clan Stats</a>&nbsp; | &nbsp;
       <a class="nav__link" href="/about">About Us</a>
     </nav>
-    <div class="player__title">
-      <h1>{{ player1.name }}</h1>
-      <h1>{{ player2.name }}</h1>
+    <div class="title__box">
+      <h1 class="player__title">{{ player1.name }}</h1>
+      <h1 class="player__title">{{ player2.name }}</h1>
     </div>
     <hr />
     <div class="main">
@@ -240,6 +240,21 @@
         </div>
         <div class="main__subcontainer">
           <div class="main__stack">
+            <div class="main__container">
+              <div class="main__head">
+                <h1 class="main__texthead">Playtime</h1>
+              </div>
+              <table class="main__table">
+                <tbody>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Total Playtime</td>
+                    <td class="main__table__data data--value">
+                      {{ player1.account.aggregates.playtime }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div class="main__container">
               <div class="main__head">
                 <h1 class="main__texthead">Kills</h1>
@@ -463,6 +478,21 @@
             </div>
           </div>
           <div class="main__stack">
+            <div class="main__container">
+              <div class="main__head main__head--right">
+                <h1 class="main__texthead">Playtime</h1>
+              </div>
+              <table class="main__table main__table--right">
+                <tbody>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">
+                      {{ player2.account.aggregates.playtime }}
+                    </td>
+                    <td class="main__table__data data--value">Total Playtime</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div class="main__container">
               <div class="main__head main__head--right">
                 <h1 class="main__texthead">Kills</h1>

@@ -24,7 +24,22 @@
       <a class="nav__link" href="/about">About Us</a>
     </nav>
     {% if found %}
-    <h1 class="player__title">{{ data.name }}</h1>
+    <div class="title__box">
+      <h1 class="player__title">{{ data.name }}</h1>
+      <form class="search__container--compare" action="{{ url_for('main.load') }}">
+        <button class="search__button" type="submit">Compare</button>
+        <input type="hidden" name="p1" value="{{ request.args.get('p1', '') }}"/>
+        <input
+          class="search__input"
+          type="text"
+          name="p2"
+          pattern="{{ '^[A-Za-z0-9 ]+[#]\d{4}$' }}"
+          placeholder="guardian#0000"
+          value="{{ request.args.get('p2','') }}"
+          required
+        />
+      </form>
+    </div>
     {% endif %}
     <hr />
     <div class="main">
@@ -131,6 +146,21 @@
         </div>
         <div class="main__subcontainer">
           <div class="main__stack">
+            <div class="main__container">
+              <div class="main__head">
+                <h1 class="main__texthead">Playtime</h1>
+              </div>
+              <table class="main__table">
+                <tbody>
+                  <tr class="main__table__row">
+                    <td class="main__table__data data--key">Total Playtime</td>
+                    <td class="main__table__data data--value">
+                      {{ data.account.aggregates.playtime }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div class="main__container">
               <div class="main__head">
                 <h1 class="main__texthead">Kills</h1>

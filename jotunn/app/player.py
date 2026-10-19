@@ -695,7 +695,9 @@ class Player:
                 }
             )
 
-        self.account["aggregates"]["playtime"] = total_playtime
+        self.account["aggregates"]["playtime"] = datetime.timedelta(
+            minutes=total_playtime
+        )
         return True
 
     def process_metric_data(self, data: bytes):

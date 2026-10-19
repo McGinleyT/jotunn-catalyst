@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, request
+from flask import Blueprint, render_template, request
 from .player import Player
 
 main_bp = Blueprint("main", __name__)
@@ -26,13 +26,13 @@ def privacy():
 
 @main_bp.route("/loading")
 def load():
-    query = request.args.get("q", None)
+    query = request.args.get("p1", None)
     return render_template("loading.html", query=query)
 
 
 @main_bp.route("/player")
 def player():
-    query = request.args.get("q", None)
+    query = request.args.get("p1", None)
     if query is None:
         return render_template("player.html", found=False, data=None)
 
@@ -51,9 +51,12 @@ def compare():
         return render_template("compare.html", found=False, data=None)
 
     player_1 = Player(p1)
-    player_1.process()
+    p1_result = player_1.process()
     player_2 = Player(p2)
-    player_2.process()
+    p2_result = player_2.process()
+
+    if not (p1_result and p2_result):
+        return render_template("compare.html", found=False, player1=None, player2=None)
 
     return render_template(
         "compare.html", found=True, player1=player_1, player2=player_2

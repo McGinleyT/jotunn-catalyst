@@ -70,6 +70,26 @@ b {
     font-weight: bold;
 }
 
+.arc {
+    color: var(--arc);
+}
+
+.void {
+    color: var(--void);
+}
+
+.solar {
+    color: var(--solar);
+}
+
+.strand {
+    color: var(--strand);
+}
+
+.stasis {
+    color: var(--stasis);
+}
+
 /*NAV (VERSION 3)--------------------------------*/
 
 
@@ -112,14 +132,17 @@ b {
     color: #0000ff;
 }
 
-.player__title {
-    font-family: Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bolder;
-    font-size: 2rem;
+.title__box {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 50%;
+}
+
+.player__title {
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    font-size: 2rem;
 }
 
 .logo__image {
@@ -179,7 +202,7 @@ b {
     color: rgb(20, 20, 20);
     margin: 5px 5px 0;
     min-width: 8rem;
-    max-width: 80%;
+    max-width: 75%;
 }
 
 .main__texthead--description {
@@ -289,7 +312,7 @@ b {
 .search__container {
     display: flex;
     /* justify-content: space-between; */
-    margin: 5px;
+    margin: 5px 5px 0 5px;
 }
 
 .search__input {
@@ -314,6 +337,12 @@ b {
     /* background-color: var(--text-select); */
     /* filter: url(#rgb-diffract); */
     text-decoration: underline;
+}
+
+.search__container--compare {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-grow: 1;
 }
 
 /*FOOTER--------------------------------------------*/
@@ -358,6 +387,10 @@ footer {
     background-color: #daa520;
 }
 
+.symbol {
+    font-family: "DestinySymbols";
+}
+
 @supports (-webkit-backdrop-filter: blur(var(--filterblur))) {
 
     .nav,
@@ -376,7 +409,7 @@ footer {
         width: 75vw;
     }
 
-    .player__title {
+    .title__box {
         width: 75%;
     }
 }
@@ -411,8 +444,43 @@ footer {
         width: 90vw;
     }
 
+    .player__title {
+        font-size: 1.5rem;
+    }
+
+    .title__box {
+        flex-direction: column;
+    }
+
     .main__texthead {
-        width: min-content;
+        width: max-content;
+    }
+
+    .main__subcontainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main__table {
+        width: 95%;
+    }
+
+    .main__image--heatmap {
+        width: 100%;
+    }
+
+    .search__container {
+        flex-direction: column;
+    }
+
+    .search__container--compare {
+        margin-top: 5px;
+    }
+
+    .search__input {
+        width: auto;
+        flex-grow: 1;
+        margin: 5px 0;
     }
 
     footer {

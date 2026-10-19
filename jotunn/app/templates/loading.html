@@ -31,14 +31,15 @@
               const queryString = window.location.search;
               const urlParams = new URLSearchParams(queryString);
 
-              const singlePlayer = urlParams.get("q");
-              const comparePlayerOne = urlParams.get("p1");
-              const comparePlayerTwo = urlParams.get("p2");
-
-              if (singlePlayer != null) {
+              const playerOne = urlParams.get("p1");
+              const playerTwo = urlParams.get("p2");
+              if (playerOne == null && playerTwo == null) {
+                window.location.href = `/main`;
+                window.history.replaceState({}, "", "/main");
+              } else if (playerOne != null && playerTwo == null) {
                 window.location.href = `/player` + window.location.search;
                 window.history.replaceState({}, "", "/main");
-              } else if (comparePlayerOne != null && comparePlayerTwo != null) {
+              } else if (playerOne != null && playerTwo != null) {
                 window.location.href = `/compare` + window.location.search;
                 window.history.replaceState({}, "", "/main");
               }

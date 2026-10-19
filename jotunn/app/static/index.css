@@ -63,6 +63,7 @@ body {
 
 h3,
 pre {
+    line-height: 1;
     font-family: mono;
     text-align: center;
     font-weight: bolder;
@@ -161,6 +162,11 @@ img {
     hr:not(.privacy__hr) {
         width: 66%;
         animation: none;
+    }
+
+    pre {
+        font-size: 10px;
+        line-height: 1;
     }
 
     .nav__link {

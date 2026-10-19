@@ -107,14 +107,18 @@ hr {
     color: #0000ff;
 }
 
+.title__box {
+    display: flex;
+    flex-direction: row;
+    width: 50vw;
+    justify-content: space-between;
+}
+
 .player__title {
     font-family: Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bolder;
     font-size: 2rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 50vw;
+    width: max-content;
 }
 
 .logo__image {
@@ -395,7 +399,7 @@ footer {
 /*MEDIA AND PRINT-------------------------------------------*/
 @media screen and (max-width: 1500px) {
 
-    .player__title,
+    .title__box,
     .main,
     hr {
         width: 75vw;
@@ -434,6 +438,14 @@ footer {
 
     .main__texthead {
         width: min-content;
+    }
+
+    .title__box {
+        width: 90vw;
+    }
+
+    .player__title {
+        font-size: 1rem;
     }
 
     footer {
