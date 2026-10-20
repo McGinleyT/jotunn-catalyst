@@ -1,16 +1,9 @@
-base64
-collections
 datetime
 dayplot
-io
 matplotlib
-operator
 orjson
 requests
-re
-time
 urllib3
 flask
-os
 dotenv
 gunicorn
